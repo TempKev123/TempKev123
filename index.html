@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
+    <head><p>Kev's Accessory Shop</p></head>
     <head>
+        <meta name="author" content="Sujit Dityam">
         <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     </head>
     <body>
@@ -18,10 +20,62 @@
         function calculate() {
             var price = $('#price').val();
             var discount= $('#discount').val();
-            var va = (price-discount);
-            var vat=va*0.07;
+            var vat = (price-discount)*0.07;
+            var total=vat+(price-discount);
             $('#vat').html('VAT: ' + vat.toFixed(2))
-            $('#total').html('Total: ' + (va+vat).toFixed(2))
+            $('#total').html('Total: ' + total.toFixed(2))
+            const tbodyRef = $('#data tbody')
+            tbodyRef.before(
+                  `<tr>
+                  <td>${price}</td>
+                  <td>${discount}</td>
+                  <td>${total}</td>
+                  </tr>`)
         }
+        function loadData() {
+      $.getJSON("data.json", (data) => {
+        const tbodyRef = $('#data tbody')
+        
+        $.each(data, (key, val) => {
+          console.debug(key, val)
+          tbodyRef.before(
+            `<tr>
+            <td>${val.price}</td>
+            <td>${val.discount}</td>
+            <td>${val.total}</td>
+            </tr>`)
+        });
+      });
+    }
     </script>
+    <body onload="loadData()">
+        <table>
+          <tr>
+            <td>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div>
+                <table id="data">
+                  <thead>
+                    <tr>
+                      <th>Price</th>
+                      <th>Discount</th>
+                      <th>Total</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+      
+                  </tbody>
+                </table>
+              </div>
+      
+            </td>
+          </tr>
+        </table>
+      
+      </body>
+      
+      </html>
 </html>
