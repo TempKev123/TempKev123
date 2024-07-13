@@ -1,81 +1,14 @@
-<!DOCTYPE html>
-<html>
-    <head><p>Kev's Accessory Shop</p></head>
-    <head>
-        <meta name="author" content="Sujit Dityam">
-        <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
-    </head>
-    <body>
-        Price
-        <input type="number" id="price"><br>
-        Discount
-        <input type="number" id="discount"><br>
-        <button onclick="calculate()">Calculate Total</button>
-        <p>
-            <span id="vat">VAT: 0</span>
-        </p>
-        <span id="total">Total: 0</span>
-    </body>
-    <script>
-        function calculate() {
-            var price = $('#price').val();
-            var discount= $('#discount').val();
-            var vat = (price-discount)*0.07;
-            var total=vat+(price-discount);
-            $('#vat').html('VAT: ' + vat.toFixed(2))
-            $('#total').html('Total: ' + total.toFixed(2))
-            const tbodyRef = $('#data tbody')
-            tbodyRef.before(
-                  `<tr>
-                  <td>${price}</td>
-                  <td>${discount}</td>
-                  <td>${total}</td>
-                  </tr>`)
-        }
-        function loadData() {
-      $.getJSON("data.json", (data) => {
-        const tbodyRef = $('#data tbody')
-        
-        $.each(data, (key, val) => {
-          console.debug(key, val)
-          tbodyRef.before(
-            `<tr>
-            <td>${val.price}</td>
-            <td>${val.discount}</td>
-            <td>${val.total}</td>
-            </tr>`)
-        });
-      });
-    }
-    </script>
-    <body onload="loadData()">
-        <table>
-          <tr>
-            <td>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <div>
-                <table id="data">
-                  <thead>
-                    <tr>
-                      <th>Price</th>
-                      <th>Discount</th>
-                      <th>Total</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-      
-                  </tbody>
-                </table>
-              </div>
-      
-            </td>
-          </tr>
-        </table>
-      
-      </body>
-      
-      </html>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + React</title>
+    <script type="module" crossorigin src="/assets/index-B81nhvHc.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-DiwrgTda.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
 </html>
